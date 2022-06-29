@@ -1,0 +1,14 @@
+class DryConnection:
+    def cursor(self):
+        return DryCursor()
+
+    def commit(self):
+        pass
+
+
+class DryCursor:
+    def execute(self, sql: str, params: tuple = ()) -> None:
+        print(sql, params, sep="\n")
+
+    def close(self):
+        pass

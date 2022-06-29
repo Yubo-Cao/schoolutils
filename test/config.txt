@@ -1,0 +1,62 @@
+>>> from config import Config
+>>> cfg = Config()
+>>> cfg.clear()
+>>> cfg
+{}
+>>> cfg['A'] = 10
+>>> cfg
+{'A': 10}
+>>> str(cfg) 
+"{'A': 10}"
+>>> del cfg['A']
+>>> cfg
+{}
+>>> cfg['B'] = 20
+>>> cfg['C'] = 30
+>>> cfg.popitem()
+('C', 30)
+>>> cfg.pop('B')
+20
+>>> cfg.update({chr(n + 65):n for n in range(5)})
+>>> cfg
+{'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4}
+>>> cfg['A']
+0
+>>> list(cfg)
+['A', 'B', 'C', 'D', 'E']
+>>> list(cfg.keys())
+['A', 'B', 'C', 'D', 'E']
+>>> list(cfg.values())
+[0, 1, 2, 3, 4]
+>>> {v:k for k,v in cfg.items()}
+{0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E'}
+>>> with open(cfg.path) as f:
+...     print(f.read().strip())
+...
+A: 0
+B: 1
+C: 2
+D: 3
+E: 4
+>>> cfg['A'] = {
+...  "brand": "Ford",
+...  "model": "Mustang",
+...  "year": 1964
+... }
+...
+>>> cfg['A']['model'] = 'GSMST'
+>>> with open(cfg.path) as f:
+...     print(f.read().strip())
+...
+A:
+  brand: Ford
+  model: GSMST
+  year: 1964
+B: 1
+C: 2
+D: 3
+E: 4
+>>> type(cfg)
+<class 'config.Config'>
+>>> cfg.A.model
+'GSMST'
